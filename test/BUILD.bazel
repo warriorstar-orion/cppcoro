@@ -42,7 +42,12 @@ cc_test(
         "//conditions:default": [],
     }),
     copts = select({
-        "@cppcoro//:windows": [],
+        "@cppcoro//:windows": [
+            "/await",
+            "/analyze:WX-",
+            "/analyze:max_paths 512",
+            "/std:c++17",
+        ],
         "@cppcoro//:darwin": [
             "-std=c++2a",
             "-fcoroutines-ts",
