@@ -146,8 +146,19 @@ cc_library(
         ],
         "//conditions:default": [],
     }),
+    defines = select({
+        ":windows": [
+            "_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING",
+        ],
+        "//conditions:default": [],
+    }),
     copts = select({
-        ":windows": [],
+        ":windows": [
+            "/await",
+            "/analyze:WX-",
+            "/analyze:max_paths 512",
+            "/std:c++latest",
+        ],
         ":darwin": [
             "-std=c++2a",
             "-fcoroutines-ts",
